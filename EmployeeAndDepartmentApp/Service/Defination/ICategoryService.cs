@@ -7,5 +7,8 @@ namespace EmployeeAndDepartmentApp.Service.Defination
         Task<List<Category>> GetAllCategoriesAsync();
         Task<Category> GetCategoryByIdAsync(int id);
         Task<bool> AddCategoryAsync(Category category);
+        Task<bool> DeleteCategoryAsync(int id);
+        Task<bool> UpdateCategoryAsync(int id,Category category);
+
     }
 }

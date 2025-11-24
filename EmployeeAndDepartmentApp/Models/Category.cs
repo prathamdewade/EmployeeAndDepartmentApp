@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EmployeeAndDepartmentApp.Models
 {
@@ -8,7 +9,7 @@ namespace EmployeeAndDepartmentApp.Models
         [Key]
         public int CId { get; set; }
         public string CName { get; set; }
-
+        [JsonIgnore]
         public List<Product> Products { get; set; }
       
     }

@@ -3,6 +3,7 @@ using EmployeeAndDepartmentApp.Helper;
 using EmployeeAndDepartmentApp.Models;
 using EmployeeAndDepartmentApp.Service.Defination;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -55,14 +56,26 @@ namespace EmployeeAndDepartmentApp.Controllers
 
         // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] string CategoryName)
         {
+            Category cats = new Category
+            {
+                CName= CategoryName
+            };
+            var res= await this.service.UpdateCategoryAsync(id, cats);
+            return res
+                ? Ok(ApiResponse<string>.Success("Category Updated Successfully", CategoryName))
+                : BadRequest(ApiResponse<string>.Failed("No Category Found"));
         }
 
         // DELETE api/<CategoryController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+             var res=await this.service.DeleteCategoryAsync(id);
+            return res
+                ? Ok(ApiResponse<string>.Success("Category Deleted Successfully", id.ToString()))
+                : BadRequest(ApiResponse<string>.Failed("No Category Found"));
         }
     }
 }

@@ -9,6 +9,9 @@ namespace EmployeeAndDepartmentApp.Repositories
         public Task<Category> GetCategoryByIdAsync(int id);
 
         public Task<bool> AddCategory(Category category);
+
+        public Task<bool> UpdateCategory(Category category);
+        public Task<bool> DeleteCategory(Category category);
     }
 
 
@@ -25,6 +28,12 @@ namespace EmployeeAndDepartmentApp.Repositories
             return await db.SaveChangesAsync() > 0;
         }
 
+        public async Task<bool> DeleteCategory(Category category)
+        {
+             db.Categories.Remove(category);
+            return await  db.SaveChangesAsync() > 0;
+        }
+
         public async Task<List<Category>> GetAllCategoriesAsync()
         {
           return  await db.Categories.ToListAsync();
@@ -33,6 +42,12 @@ namespace EmployeeAndDepartmentApp.Repositories
         public async Task<Category> GetCategoryByIdAsync(int id)
         {
            return await db.Categories.FirstOrDefaultAsync(c => c.CId == id);
+        }
+
+        public async Task<bool> UpdateCategory(Category category)
+        {
+             db.Categories.Update(category);
+            return await db.SaveChangesAsync() > 0; 
         }
     }
 }
