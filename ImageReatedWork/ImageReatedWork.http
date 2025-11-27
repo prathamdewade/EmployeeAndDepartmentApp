@@ -1,0 +1,6 @@
+@ImageReatedWork_HostAddress = http://localhost:5124
+
+GET {{ImageReatedWork_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
